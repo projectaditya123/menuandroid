@@ -6,6 +6,14 @@
     tools:context=".ShortsFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="list radio button"
+        android:textSize="18sp"
+        android:layout_gravity="center" />
+
     <RadioGroup
         android:id="@+id/radioGroup"
         android:checkedButton="@+id/radio_button_1"
@@ -15,28 +23,28 @@
             android:id="@+id/radio_button_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="cek123"/>
+            android:text="list 1"/>
         <RadioButton
             android:id="@+id/radio_button_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="2"/>
+            android:text="list 2"/>
         <RadioButton
             android:id="@+id/radio_button_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="3"/>
+            android:text="list 3"/>
         <RadioButton
             android:id="@+id/radio_button_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="4"/>
+            android:text="list 4"/>
         <RadioButton
             android:id="@+id/radio_button_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:enabled="false"
-            android:text="1"/>
+            android:text="list 5"/>
     </RadioGroup>
 
 </FrameLayout>

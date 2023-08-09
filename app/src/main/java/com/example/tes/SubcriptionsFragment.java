@@ -1,26 +1,25 @@
 package com.example.tes;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SubcriptionsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.fragment.app.Fragment;
+
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import java.util.ArrayList;
+
 public class SubcriptionsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +27,6 @@ public class SubcriptionsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SubcriptionsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SubcriptionsFragment newInstance(String param1, String param2) {
         SubcriptionsFragment fragment = new SubcriptionsFragment();
         Bundle args = new Bundle();
@@ -58,7 +48,32 @@ public class SubcriptionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_subcriptions, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_subcriptions, container, false);
+
+        ImageSlider imageSlider = rootView.findViewById(R.id.imageSlider);
+
+        ArrayList<SlideModelWithUrl> slideModels = new ArrayList<>();
+        slideModels.add(new SlideModelWithUrl(R.drawable.image1, "https://www.youtube.com/", "Youtube"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image2, "https://www.youtube.com/", "Youtube"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image3, "https://id-id.facebook.com/", "Facebook"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image4, "https://www.google.com/?hl=ID", "Google"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image5, "https://www.google.com/?hl=ID", "Google"));
+
+        ArrayList<SlideModel> imageSliderModels = new ArrayList<>();
+        for (SlideModelWithUrl model : slideModels) {
+            imageSliderModels.add(new SlideModel(model.getImageRes(), model.getDisplayText(), ScaleTypes.FIT));
+        }
+
+        imageSlider.setImageList(imageSliderModels, ScaleTypes.FIT);
+        imageSlider.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemSelected(int position) {
+                String url = slideModels.get(position).getImageUrl();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        });
+
+        return rootView;
     }
 }
