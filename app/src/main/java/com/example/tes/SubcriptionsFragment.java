@@ -53,11 +53,11 @@ public class SubcriptionsFragment extends Fragment {
         ImageSlider imageSlider = rootView.findViewById(R.id.imageSlider);
 
         ArrayList<SlideModelWithUrl> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModelWithUrl(R.drawable.image1, "https://www.youtube.com/", "Youtube"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image2, "https://www.youtube.com/", "Youtube"));
         slideModels.add(new SlideModelWithUrl(R.drawable.image2, "https://www.youtube.com/", "Youtube"));
         slideModels.add(new SlideModelWithUrl(R.drawable.image3, "https://id-id.facebook.com/", "Facebook"));
-        slideModels.add(new SlideModelWithUrl(R.drawable.image4, "https://www.google.com/?hl=ID", "Google"));
-        slideModels.add(new SlideModelWithUrl(R.drawable.image5, "https://www.google.com/?hl=ID", "Google"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image1, "https://www.google.com/?hl=ID", "Google"));
+        slideModels.add(new SlideModelWithUrl(R.drawable.image1, "https://www.google.com/?hl=ID", "Google"));
 
         ArrayList<SlideModel> imageSliderModels = new ArrayList<>();
         for (SlideModelWithUrl model : slideModels) {
