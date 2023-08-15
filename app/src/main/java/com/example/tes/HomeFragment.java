@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 public class HomeFragment extends Fragment {
 
     private String[] imageURLs = {
-            "https://iconlogovector.com/uploads/images/2023/02/lg-2092c00f77297c08bcabadb2e1958b1b87.jpg",
+            "https://mmc.tirto.id/image/otf/880x495/2019/11/05/logo-fb_ratio-16x9.jpg",
             "https://1000logos.net/wp-content/uploads/2016/11/google-logo.jpg",
             "https://iconlogovector.com/uploads/images/2023/02/lg-a2b48b800bc00589f086b19d13e8902a62.jpg"
     };
