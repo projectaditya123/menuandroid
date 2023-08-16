@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             selectedFragment = new HomeFragment();
         } else if (itemId == R.id.nav_kalender) {
             selectedFragment = new KalenderFragment();
-        } else if (itemId == R.id.nav_share) {
+        } else if (itemId == R.id.nav_jadwal_pelajaran) {
             selectedFragment = new JadwalPelajaran();
         } else if (itemId == R.id.nav_about) {
             selectedFragment = new PembelajaranDigital();
@@ -167,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+
+
         dialog.setContentView(R.layout.bottomsheetlayout);
 
         LinearLayout videoLayout = dialog.findViewById(R.id.layoutVideo);

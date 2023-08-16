@@ -9,6 +9,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="JADWAL HARI INI"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:fontFamily="arial"
+        android:textStyle="bold"
+        android:textColor="@color/purple_200"/>
 
 </FrameLayout>
