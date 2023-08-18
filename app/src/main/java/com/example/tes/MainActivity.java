@@ -77,12 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         });
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBottomDialog();
-            }
-        });
+        fab.setOnClickListener(view -> showBottomDialog());
 
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -110,12 +105,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
-    @Override
-        public boolean onNavigationItemSelected (@NonNull MenuItem item){
-        // Handle navigation item selection here
-        Fragment selectedFragment = null;
 
-        int itemId = item.getItemId(); // Get the ID of the selected menu item
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation item selection here
+        displaySelectedFragment(item.getItemId());
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void displaySelectedFragment(int itemId) {
+        Fragment selectedFragment = null;
 
         if (itemId == R.id.nav_home) {
             selectedFragment = new HomeFragment();
@@ -138,13 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.replace(R.id.frame_layout, selectedFragment);
             transaction.commit();
         }
-
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
-
-
-
 
     @Override
     public void onBackPressed() {
@@ -167,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        
-
 
         dialog.setContentView(R.layout.bottomsheetlayout);
 
@@ -177,48 +169,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         LinearLayout liveLayout = dialog.findViewById(R.id.layoutLive);
         ImageView cancelButton = dialog.findViewById(R.id.cancelButton);
 
-        videoLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Upload a Video is clicked",Toast.LENGTH_SHORT).show();
-
-            }
+        videoLayout.setOnClickListener(v -> {
+            dialog.dismiss();
+            Toast.makeText(MainActivity.this, "Upload a Video is clicked", Toast.LENGTH_SHORT).show();
         });
 
-        shortsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Create a short is Clicked",Toast.LENGTH_SHORT).show();
-
-            }
+        shortsLayout.setOnClickListener(v -> {
+            dialog.dismiss();
+            Toast.makeText(MainActivity.this, "Create a short is Clicked", Toast.LENGTH_SHORT).show();
         });
 
-        liveLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this,"Go live is Clicked",Toast.LENGTH_SHORT).show();
-
-            }
+        liveLayout.setOnClickListener(v -> {
+            dialog.dismiss();
+            Toast.makeText(MainActivity.this, "Go live is Clicked", Toast.LENGTH_SHORT).show();
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        cancelButton.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
     }
 }
