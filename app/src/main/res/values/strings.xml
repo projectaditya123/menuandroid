@@ -9,22 +9,22 @@
     <string name="Subject_Selector">Subject Selector</string>
     <string name="select_subject_prompt">Select a subject</string>
     <string-array name="subjects">
-        <item>Math</item>
-        <item>Science</item>
-        <item>History</item>
-        <item>English</item>
+        <item>Matematika</item>
+        <item>Ipa</item>
+        <item>Sejarah</item>
+        <item>Inggris</item>
         <item>Indonesia</item>
         <item>Agama</item>
     </string-array>
     <string name="select_day_prompt">Select a day</string>
     <string-array name="days">
-        <item>Sunday</item>
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
+        <item>Minggu</item>
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
     </string-array>
 
 </resources>
