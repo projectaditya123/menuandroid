@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="lavender">#8692f7</color>
     <color name="grey">#d2d2d2</color>
+    <color name="background_light">#FFFFFF</color>
+    <color name="background_dark">#212121</color>
 </resources>

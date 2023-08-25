@@ -1,26 +1,23 @@
 package com.example.tes;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ShortsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ShortsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private boolean isDarkMode = false;
+    private View rootView;
+    private Button darkModeButton;
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -28,15 +25,6 @@ public class ShortsFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShortsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ShortsFragment newInstance(String param1, String param2) {
         ShortsFragment fragment = new ShortsFragment();
         Bundle args = new Bundle();
@@ -55,10 +43,30 @@ public class ShortsFragment extends Fragment {
         }
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shorts, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_shorts, container, false);
+        darkModeButton = rootView.findViewById(R.id.darkModeButton);
+
+        darkModeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isDarkMode = !isDarkMode;
+                updateUI();
+            }
+        });
+
+        return rootView;
+    }
+
+    private void updateUI() {
+        if (isDarkMode) {
+            rootView.setBackgroundColor(getResources().getColor(R.color.background_dark)); // Set dark mode background color
+            // Update other UI elements for dark mode
+        } else {
+            rootView.setBackgroundColor(getResources().getColor(R.color.background_light)); // Set light mode background color
+            // Update other UI elements for light mode
+        }
     }
 }
