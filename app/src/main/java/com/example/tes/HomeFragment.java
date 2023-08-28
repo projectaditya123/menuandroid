@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.bumptech.glide.Glide;
 
 public class HomeFragment extends Fragment {
@@ -35,6 +34,17 @@ public class HomeFragment extends Fragment {
 
         ViewPager2 viewPager = rootView.findViewById(R.id.viewPager);
         viewPager.setAdapter(new ImageSliderAdapter());
+
+        CardView clothingCard = rootView.findViewById(R.id.clothingCard);
+        clothingCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Ketika CardView di klik, lakukan navigasi ke halaman baru (aktivitas SekolahDasarLayoutActivity)
+                Intent intent = new Intent(getContext(), SekolahDasarLayoutActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return rootView;
     }
