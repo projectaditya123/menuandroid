@@ -10,14 +10,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -29,16 +32,30 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FloatingActionButton fab;
     private DrawerLayout drawerLayout;
     private BottomNavigationView bottomNavigationView;
 
+    private ListView listView;
+    private ArrayAdapter<String> adapter;
+    private List<String> allLanguages;
+    private MenuItem searchItem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listView = findViewById(R.id.listView);
+        allLanguages = new ArrayList<>(Arrays.asList("Java", "Android", "HTML", "CSS", "Python"));
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, allLanguages);
+        listView.setAdapter(adapter);
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         fab = findViewById(R.id.fab);
@@ -85,25 +102,70 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+
+        // Simpan referensi ke item pencarian
+        searchItem = menu.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterLanguages(newText);
+                return true;
+            }
+        });
+
         return true;
     }
 
+    private void filterLanguages(String query) {
+        List<String> filteredLanguages = new ArrayList<>();
+        for (String language : allLanguages) {
+            if (language.toLowerCase().contains(query.toLowerCase())) {
+                filteredLanguages.add(language);
+            }
+        }
+        adapter.clear();
+        adapter.addAll(filteredLanguages);
+        adapter.notifyDataSetChanged();
+    }
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.group) {
+        if (id == R.id.search) {
+            toggleListViewVisibility(); // Memanggil metode untuk menampilkan/menyembunyikan ListView
+            return true;
+        } else if (id == R.id.group) {
             Toast.makeText(this, "Create new group", Toast.LENGTH_SHORT).show();
-        }
-        if (id == R.id.search1) {
+            return true;
+        } else if (id == R.id.search1) {
             Toast.makeText(this, "New search", Toast.LENGTH_SHORT).show();
-        }
-        if (id == R.id.settings) {
+            return true;
+        } else if (id == R.id.settings) {
             Toast.makeText(this, "Create new settings", Toast.LENGTH_SHORT).show();
-        }
-        if (id == R.id.profile) {
+            return true;
+        } else if (id == R.id.profile) {
             Toast.makeText(this, "Create new profile", Toast.LENGTH_SHORT).show();
+            return true;
         }
-        return true;
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void toggleListViewVisibility() {
+        if (listView.getVisibility() == View.VISIBLE) {
+            listView.setVisibility(View.GONE);
+            if (searchItem != null) {
+                searchItem.collapseActionView();
+            }
+        } else {
+            listView.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
