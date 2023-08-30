@@ -1,6 +1,7 @@
 package com.example.tes;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.provider.MediaStore;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayAdapter<String> adapter;
     private List<String> allLanguages;
     private MenuItem searchItem;
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private final boolean isListViewVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,10 +144,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.notifyDataSetChanged();
     }
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.search) {
-            toggleListViewVisibility(); // Memanggil metode untuk menampilkan/menyembunyikan ListView
+
+        if (id == R.id.camera) {
+            dispatchTakePictureIntent();
+            return true;
+        } else if (id == R.id.search) {
+            toggleListViewVisibility(); // Ganti dengan metode Anda untuk menampilkan/menyembunyikan ListView
             return true;
         } else if (id == R.id.group) {
             Toast.makeText(this, "Create new group", Toast.LENGTH_SHORT).show();
@@ -157,6 +170,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            cameraActivityResultLauncher.launch(takePictureIntent);
+        }
+    }
+
     private void toggleListViewVisibility() {
         if (listView.getVisibility() == View.VISIBLE) {
             listView.setVisibility(View.GONE);
@@ -167,6 +187,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             listView.setVisibility(View.VISIBLE);
         }
     }
+
+    private final ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK) {
+                        // Handle the result of the camera activity here
+                    }
+                }
+            }
+    );
+
+
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
