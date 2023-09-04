@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_student_table"
     android:orientation="vertical">
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stretchColumns="*"
-        android:padding="16dp">
 
         <!-- Header Row -->
         <TableRow>
@@ -75,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
+                android:text="bagas"
                 android:paddingEnd="8dp"
                 android:gravity="end" />
 
@@ -96,14 +91,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85"
+                android:text="70"
                 android:gravity="end" />
         </TableRow>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
+                android:text="andika"
                 android:paddingEnd="8dp"
                 android:gravity="end" />
 
@@ -124,14 +119,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85"
+                android:text="60"
                 android:gravity="end" />
         </TableRow>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
+                android:text="siswanto"
                 android:paddingEnd="8dp"
                 android:gravity="end" />
 
@@ -152,14 +147,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85"
+                android:text="75"
                 android:gravity="end" />
         </TableRow>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="John Doe"
+                android:text="anjas"
                 android:paddingEnd="8dp"
                 android:gravity="end" />
 
@@ -180,11 +175,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85"
+                android:text="50"
                 android:gravity="end" />
         </TableRow>
 
         <!-- Add more data rows as needed -->
 
     </TableLayout>
-</LinearLayout>
+
