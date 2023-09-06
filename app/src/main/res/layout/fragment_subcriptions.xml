@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bkg"
+    android:orientation="vertical"
     tools:context=".SubcriptionsFragment">
 
     <androidx.cardview.widget.CardView
@@ -29,14 +30,21 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- ListView untuk Menampilkan Data Siswa dan Nilai -->
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Subcriptions"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/black"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="20dp"
+        android:background="@android:color/transparent" />
 
+    <!-- Tombol untuk Menambahkan Siswa atau Nilai -->
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Tambah Siswa atau Nilai" />
 
-</FrameLayout>
+</LinearLayout>
