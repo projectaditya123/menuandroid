@@ -26,5 +26,19 @@
         <item>Jumat</item>
         <item>Sabtu</item>
     </string-array>
+    <array name="pilihkelas">
+        <item>Kelas 1A</item>
+        <item>Kelas 1B</item>
+        <item>Kelas 2A</item>
+        <!-- Tambahkan item lain sesuai kebutuhan -->
+    </array>
+    <array name="pilihagama">
+        <item>Islam</item>
+        <item>Kristen</item>
+        <item>Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <!-- Tambahkan item lain sesuai kebutuhan -->
+    </array>
 
 </resources>
