@@ -36,25 +36,19 @@
             android:orientation="vertical">
 
             <!-- Judul Library -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Library"
-                android:gravity="center"
-                android:textSize="30sp"
-                android:textColor="@color/lavender"/>
+
 
             <!-- NPM -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NPM\t\t:" />
+                android:text="Nim\t\t:" />
 
             <EditText
                 android:id="@+id/isinpm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukan NPM" />
+                android:hint="Masukkan Nim" />
 
             <!-- Nama -->
             <TextView
@@ -66,7 +60,7 @@
                 android:id="@+id/isinama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Masukan Nama" />
+                android:hint="Masukkan Nama" />
 
             <!-- Jenis Kelamin -->
             <TextView
@@ -125,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:hint="Masukan Tempat Lahir" />
+                android:hint="Masukkan Tempat Lahir" />
 
             <!-- Tanggal Lahir -->
             <TextView
@@ -139,6 +133,14 @@
                 android:text=""
                 android:layout_height="wrap_content"
                 android:hint="dd/MM/yyyy" />
+
+            <!-- Upload Gambar -->
+            <Button
+                android:id="@+id/uploadGambarButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Upload Gambar" />
+
 
             <!-- Tombol SIMPAN -->
             <Button
@@ -178,4 +180,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-

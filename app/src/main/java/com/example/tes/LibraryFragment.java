@@ -1,30 +1,30 @@
 package com.example.tes;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.HashMap;
 
 public class LibraryFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
-
+    private static final int PICK_IMAGE = 1;
     private EditText isinpm;
     private EditText isinama;
     private RadioGroup jk;
@@ -34,28 +34,8 @@ public class LibraryFragment extends Fragment {
     private EditText tanggallahir;
     private Button simpan;
     private TextView hasil;
-
-    public LibraryFragment() {
-        // Required empty public constructor
-    }
-
-    public static LibraryFragment newInstance(String param1, String param2) {
-        LibraryFragment fragment = new LibraryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private ImageView gambar;
+    private Button uploadGambarButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,6 +83,8 @@ public class LibraryFragment extends Fragment {
         tanggallahir = view.findViewById(R.id.tanggallahir);
         simpan = view.findViewById(R.id.simpan);
         hasil = view.findViewById(R.id.hasil);
+        gambar = view.findViewById(R.id.gambar);
+        uploadGambarButton = view.findViewById(R.id.uploadGambarButton);
 
         // Menambahkan event onClickListener ke tombol "SIMPAN"
         simpan.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +107,37 @@ public class LibraryFragment extends Fragment {
             }
         });
 
+        // Menambahkan event onClickListener ke tombol "Upload Gambar"
+        uploadGambarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Membuka galeri untuk memilih gambar
+                Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent, PICK_IMAGE);
+            }
+        });
+
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                Uri selectedImageUri = data.getData();
+
+                try {
+                    // Mengubah URI gambar menjadi bitmap
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), selectedImageUri);
+
+                    // Menampilkan gambar yang diunggah di ImageView
+                    gambar.setImageBitmap(bitmap);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
